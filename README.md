@@ -20,17 +20,17 @@ This will install the PostgreSQL database server and additional contrib packages
 After installation, PostgreSQL should start automatically. You can check its status with:
 
 ```bash
-sudo systemctl status PostgreSQL
+sudo systemctl status postgresql
 ```
 If it's not running, you can start it with:
 
 ```bash
-sudo systemctl start PostgreSQL
+sudo systemctl start postgresql
 ```
 You can also enable it to start on boot:
 
 ```bash
-sudo systemctl enable PostgreSQL
+sudo systemctl enable postgresql
 ```
 
 ## 3. Set up a PostgreSQL User and Database:
@@ -74,7 +74,6 @@ curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --d
 Create the repository configuration file:
 ```
 sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
-
 ```
 b. **Install pgAdmin**
 

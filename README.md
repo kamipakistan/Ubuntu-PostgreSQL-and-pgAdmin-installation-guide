@@ -52,19 +52,48 @@ ALTER USER username WITH PASSWORD 'new_password';
 Remember to replace "username" and "new_password" with the actual values.
 
 ### b. Create a New PostgreSQL User and Database
-You can choose to create a new PostgreSQL user and database using the following commands. This step is optional.
+You can use the following commands to create a new PostgreSQL user and database. This step is optional.
+* Switch to the Postgres user:
+  ```bash
+  sudo -i -u postgres
+  ```
+* Open the PostgreSQL prompt:
+  ```
+  psql
+  ```
+* Create a new PostgreSQL user and database (replace username and password with your credentials):
 
-```bash
-sudo -u postgres psql
-CREATE USER your_username WITH PASSWORD 'your_password';
-CREATE DATABASE your_database;
-GRANT ALL PRIVILEGES ON DATABASE your_database TO your_username;
-\q
-```
-Replace `your_username` with the desired username and `your_password` with the desired password.
+  ```bash
+  CREATE USER username WITH PASSWORD 'password';
+  CREATE DATABASE mydb OWNER username;
+  ALTER ROLE username SET client_encoding TO 'utf8';
+  ALTER ROLE username SET default_transaction_isolation TO 'read committed';
+  ALTER ROLE username SET timezone TO 'UTC';
+  GRANT ALL PRIVILEGES ON DATABASE mydb TO username;
+  ```
+* Exit PostgreSQL:
+  ```
+  \q
+  exit
+  ```
+Replace `your_username`, `password`, and `mydb` with your desired credentials.
 
+## 4. Adjust PostgreSQL Authentication:
 
-## 4. Install pgAdmin using the Official Repository
+* Open the configuration file:
+  ```
+  sudo nano /etc/postgresql/14/main/pg_hba.conf
+  ```
+* Modify the authentication settings to allow password-based login by changing `peer` to `md5` for `local` connections:
+  ```
+  local   all             postgres                                md5
+  ```
+* Restart PostgreSQL:
+  ```
+  sudo systemctl restart postgresql
+  ```
+
+## 5. Install pgAdmin using the Official Repository
 a. **Setup the repository**
  
 Install the public key for the repository (if not done previously):

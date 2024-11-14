@@ -128,3 +128,26 @@ Configure the webserver, if you installed pgadmin4-web:
 sudo /usr/pgadmin4/bin/setup-web.sh
 ```
 That's it! You've successfully set up PostgreSQL and pgAdmin on your Ubuntu system. Feel free to customize and use this script according to your needs.
+
+## 6. Accessing PostgreSQL Using pgAdmin
+a. **Open pgAdmin**
+Use your system's application launcher to search for and open pgAdmin.
+
+b. **Add a New Server in pgAdmin**
+1. In pgAdmin, **right-click on "Servers"** in the left sidebar under the "Browser" panel and select **"Create" > "Server..."**.
+
+2. In the "Create - Server" dialog that appears, provide the following information:
+
+    * General Tab:
+
+      * Name: Give a name for the connection, such as `My Server`.
+    * Connection Tab:
+
+      * **Host:** Enter `localhost` (or the IP address of the server if PostgreSQL is hosted remotely).
+      * **Port:** The default PostgreSQL port is `5432` unless you have changed it.
+      * **Maintenance Database:** This should be set to `postgres` (default).
+      * **Username:** Enter `username` (the username you created).
+      * **Password:** Enter `password` (the password you set for `username`).
+    After entering these details, click the **"Save"** button
+
+

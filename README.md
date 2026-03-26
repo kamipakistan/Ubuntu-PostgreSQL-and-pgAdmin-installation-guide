@@ -82,9 +82,14 @@ Replace `your_username`, `password`, and `mydb` with your desired credentials.
 
 * Open the configuration file:
   ```
-  sudo nano /etc/postgresql/14/main/pg_hba.conf
+  sudo nano /etc/postgresql/*/main/pg_hba.conf
   ```
 * Modify the authentication settings to allow password-based login by changing `peer` to `md5` for `local` connections:
+  Find:
+  ```
+  local   all             postgres                                peer
+  ```
+  Change to:
   ```
   local   all             postgres                                md5
   ```
@@ -93,7 +98,26 @@ Replace `your_username`, `password`, and `mydb` with your desired credentials.
   sudo systemctl restart postgresql
   ```
 
-## 5. Install pgAdmin using the Official Repository
+## 5. Allow Remote Access (Optional)
+If you want pgAdmin on another machine to connect:
+```bash
+sudo nano /etc/postgresql/*/main/postgresql.conf
+```
+Uncomment and change:
+```
+listen_addresses = '*'
+```
+Then in `pg_hba.conf`, add:
+```
+host    all             all             0.0.0.0/0               md5
+```
+
+#### Restart PostgreSQL
+```bash
+sudo systemctl restart postgresql
+```
+
+# Install pgAdmin using the Official Repository
 a. **Setup the repository**
  
 Install the public key for the repository (if not done previously):
